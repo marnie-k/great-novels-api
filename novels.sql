@@ -34,3 +34,24 @@ CREATE TABLE novels (
     deletedAt DATETIME,
     PRIMARY KEY(id)
 );
+ALTER TABLE genres
+ADD novelId;
+ADD FOREIGN KEY (novelId) REFERENCES novels(id);
+
+ALTER TABLE novels
+ADD genreIdd;
+ADD authorID;
+ADD FOREIGN KEY (genreId) REFERENCES genres(id);
+ADD FOREIGN KEY (authorId) REFERENCES authors(id);
+
+CREATE TABLE linking (
+    authorId INT,
+    genreId INT,
+    createdAt DATETIME DEFAULT NOW(),
+    updatedAt DATETIME DEFAULT NOW() ON UPDATE NOW(),
+    deletedAt DATETIME,
+    PRIMARY KEY(authorId),
+    FOREIGN KEY(authorId),
+    FOREIGN KEY(genreId)
+);
+
