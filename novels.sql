@@ -10,7 +10,7 @@ USE great_novels;
 
 CREATE TABLE genres (
     id INT auto_increment,
-    name VARCHAR(255),
+    name VARCHAR(255) NOT NULL,
     createdAt DATETIME DEFAULT NOW(),
     updatedAt DATETIME DEFAULT NOW() ON UPDATE NOW(),
     deletedAt DATETIME,
@@ -18,8 +18,8 @@ CREATE TABLE genres (
 );
 CREATE TABLE authors (
     id INT auto_increment,
-    nameFirst VARCHAR(255),
-    nameLast VARCHAR(255),
+    nameFirst VARCHAR(255) NOT NULL,
+    nameLast VARCHAR(255) NOT NULL,
     createdAt DATETIME DEFAULT NOW(),
     updatedAt DATETIME DEFAULT NOW() ON UPDATE NOW(),
     deletedAt DATETIME,
@@ -27,31 +27,24 @@ CREATE TABLE authors (
 );
 CREATE TABLE novels (
     id INT auto_increment,
-    title VARCHAR(255),
-    novelGenre VARCHAR(255),
+    authorId INT,
+    title VARCHAR(255) NOT NULL,
+    novelGenre VARCHAR(255) NOT NULL,
     createdAt DATETIME DEFAULT NOW(),
     updatedAt DATETIME DEFAULT NOW() ON UPDATE NOW(),
     deletedAt DATETIME,
-    PRIMARY KEY(id)
+    PRIMARY KEY(id),
+    FOREIGN KEY authorId REFERENCES authors(id)
 );
-ALTER TABLE genres
-ADD novelId;
-ADD FOREIGN KEY (novelId) REFERENCES novels(id);
-
-ALTER TABLE novels
-ADD genreIdd;
-ADD authorID;
-ADD FOREIGN KEY (genreId) REFERENCES genres(id);
-ADD FOREIGN KEY (authorId) REFERENCES authors(id);
 
 CREATE TABLE linking (
-    authorId INT,
+    novelId INT,
     genreId INT,
     createdAt DATETIME DEFAULT NOW(),
     updatedAt DATETIME DEFAULT NOW() ON UPDATE NOW(),
     deletedAt DATETIME,
-    PRIMARY KEY(authorId),
-    FOREIGN KEY(authorId),
-    FOREIGN KEY(genreId)
+    PRIMARY KEY(novelId, genreId),
+    FOREIGN KEY(novelId) REFERENCES novels(id),
+    FOREIGN KEY(genreId) REFERENCES genres(id)
 );
 
