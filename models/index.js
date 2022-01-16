@@ -8,19 +8,17 @@ const novelsGenres = require('./novelsGenres')
 const connection = new Sequelize('novels', 'novels', 'L0gM31n', {
     host: 'localhost', dialect : 'mysql,'
 })
-const connection = new Sequelize('novels', 'authors', 'L0gM31n', {
-    host: 'localhost', dialect : 'mysql,'
-})
-const connection = new Sequelize('novels', 'genres', 'L0gM31n', {
-    host: 'localhost', dialect : 'mysql,'
-})
-const connection = new Sequelize('novels', 'novelsGenres', 'L0gM31n', {
-    host: 'localhost', dialect : 'mysql,'
-})
+
 const authors = authorsModel(connection, Sequlize)
 const genres = genresModel(connection, Sequlize)
-const novels = novelsModel(connection, Sequlize)
-const novelsGenres = novelsGenresModel(connection, Sequlize)
+const novels = novelsModel(connection, Sequlize, authors)
+const novelsGenres = novelsGenresModel(connection, Sequlize, genres, novels)
+
+novels.belongsTo(authors)
+authors.hasMany(novels)
+
+genres.belongsToMany(novels, {through: novelsGenres})
+novels.belongsToMany(genres, {through: novelsGenres})
 
 module.exports = {
     authors,

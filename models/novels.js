@@ -1,9 +1,7 @@
-const Sequelize = require('sequelize')
-
-const novels = (connection, Sequlize) => connection.define('novels'), {
+const novels = (connection, Sequlize, authors) => connection.define('novels'), {
     id : { type: Sequelize.INTEGER, autoIncrement: true, primaryKey: true },
     titlet: { type: Sequelize.STRING },
-    authorId: { type: Sequelize.INTEGER }
+    authorId: { type: Sequelize.INTEGER, references: {model: authors, key: 'id' } }
 }, { paranoid: true })
 
 module.exports = novels
