@@ -25,5 +25,6 @@ module.exports = {
     Authors,
     Genres,
     Novels,
-    NovelsGenres
+    NovelsGenres,
+    Sequelize,
 }

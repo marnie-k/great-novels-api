@@ -1,23 +1,7 @@
 
 module.exports = {
 async up (queryInterface, Sequelize) {
-await queryInterface.bulkInsert('authors', [
-  { nameFirst: 'Oscar', nameLast: 'Wilde'},
-  { nameFirst: 'Bram', nameLast: 'Stoker'},
-  { nameFirst: 'Alice', nameLast: 'Walker'},
-  { nameFirst: 'Leo', nameLast: 'Tolstoy'},
-  { nameFirst: 'Charles', nameLast: 'Dickens'},
-  { nameFirst: 'Arthur', nameLast: 'Miller'},
-  { nameFirst: 'Alexandre', nameLast: 'Dumas'},
-  { nameFirst: 'Arthur Conan', nameLast: 'Doyle'},
-  { nameFirst: 'Robert Louis', nameLast: 'Stevenson'},
-  { nameFirst: 'Fyodor', nameLast: 'Dostoyevsky'},
-  { nameFirst: 'Agatha', nameLast: 'Christie'},
-  { nameFirst: 'Ray', nameLast: 'Bradbury'},
-  { nameFirst: 'George', nameLast: 'Orwell'},
-  { nameFirst: 'H.G.', nameLast: 'Wells'},
-  { nameFirst: 'Chinua', nameLast: 'Achebe'},
-  ])    
+ 
 await queryInterface.bulkInsert('genres', [
   { name: 'Adventure'},
   { name: 'African Literature'},
@@ -38,6 +22,24 @@ await queryInterface.bulkInsert('genres', [
   { name: 'Time Travel'},
   { name: 'War'},
   ])
+  await queryInterface.bulkInsert('authors', [
+    { nameFirst: 'Oscar', nameLast: 'Wilde'},
+    { nameFirst: 'Bram', nameLast: 'Stoker'},
+    { nameFirst: 'Alice', nameLast: 'Walker'},
+    { nameFirst: 'Leo', nameLast: 'Tolstoy'},
+    { nameFirst: 'Charles', nameLast: 'Dickens'},
+    { nameFirst: 'Arthur', nameLast: 'Miller'},
+    { nameFirst: 'Alexandre', nameLast: 'Dumas'},
+    { nameFirst: 'Arthur Conan', nameLast: 'Doyle'},
+    { nameFirst: 'Robert Louis', nameLast: 'Stevenson'},
+    { nameFirst: 'Fyodor', nameLast: 'Dostoyevsky'},
+    { nameFirst: 'Agatha', nameLast: 'Christie'},
+    { nameFirst: 'Ray', nameLast: 'Bradbury'},
+    { nameFirst: 'George', nameLast: 'Orwell'},
+    { nameFirst: 'H.G.', nameLast: 'Wells'},
+    { nameFirst: 'Chinua', nameLast: 'Achebe'},
+    ])   
+
 await queryInterface.bulkInsert('novels',[
   { title: 'Dracula', authorId: 1 },
   { title: 'The Picture of Dorian Gray', authorId: 2 },
@@ -113,4 +115,4 @@ return queryInterface.bulkInsert('novelsGenres ', [
     await queryInterface.bulkDelete('genres')
 
     return queryInterface.bulkDelete('authors')
-}
+}}

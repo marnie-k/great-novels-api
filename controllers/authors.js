@@ -5,10 +5,16 @@ const getAllAuthors = async(request, response) => {
 
     return response.send(authors)
 }
-const getAuthorById = async(request, response) => {
-    const { id } = request.params
+const getAuthorByIdOrName = async(request, response) => {
+    const { identifier } = request.params
     const author = await models.Authors.findOne({
-        where : { id },
+        where : {
+            [models.Sequelize.Op.or]: [
+            { id: identifier },
+            { nameLast: identifier }
+            ]
+        },
+       
         include: [{ model: models.Novels,
         include: [{ model: models.Genres }],
      }]
@@ -20,4 +26,4 @@ const getAuthorById = async(request, response) => {
 
 module.exports = {
     getAllAuthors,
-    getAuthorById }
+    getAuthorByIdOrName }
