@@ -1,5 +1,5 @@
 const Sequelize = require('sequelize')
-const allConfigs = require('../config/sequelize')
+const allConfigs = require('../configs/sequelize')
 const environment = process.env.NODE_ENV || 'development'
 const { username, password, database, host, dialect } = allConfigs[environment]
 
