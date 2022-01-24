@@ -1,4 +1,3 @@
-DROP DATABASE novels;
 
 CREATE DATABASE novels;
 

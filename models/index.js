@@ -1,28 +1,27 @@
 const Sequelize = require('sequelize')
-
-const authorsModel = require('./authors')
-const genresModel = require('./genres')
-const novelsModel = require('./novels')
-const novelsGenres = require('./novelsGenres')
+const AuthorsModel = require('./authors')
+const GenresModel = require('./genres')
+const NovelsModel = require('./novels')
+const NovelsGenresModel = require('./novelsGenres')
 
 const connection = new Sequelize('novels', 'novels', 'L0gM31n', {
-    host: 'localhost', dialect : 'mysql,'
+    host: 'localhost', dialect : 'mysql',
 })
 
-const authors = authorsModel(connection, Sequlize)
-const genres = genresModel(connection, Sequlize)
-const novels = novelsModel(connection, Sequlize, authors)
-const novelsGenres = novelsGenresModel(connection, Sequlize, genres, novels)
+const Authors = AuthorsModel(connection, Sequelize)
+const Genres = GenresModel(connection, Sequelize)
+const Novels = NovelsModel(connection, Sequelize, Authors)
+const NovelsGenres = NovelsGenresModel(connection, Sequelize, Genres, Novels)
 
-novels.belongsTo(authors)
-authors.hasMany(novels)
+Novels.belongsTo(Authors)
+Authors.hasMany(Novels)
 
-genres.belongsToMany(novels, {through: novelsGenres})
-novels.belongsToMany(genres, {through: novelsGenres})
+Genres.belongsToMany(Novels, {through: NovelsGenres})
+Novels.belongsToMany(Genres, {through: NovelsGenres})
 
 module.exports = {
-    authors,
-    genres,
-    novels,
-    novelsGenres
+    Authors,
+    Genres,
+    Novels,
+    NovelsGenres
 }
